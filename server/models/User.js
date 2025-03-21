@@ -11,7 +11,7 @@ const userSchema=new mongoose.Schema({
     },
     email:{
         type:String,
-        default:"aaa@gmail.com"
+        required:true
     },
     address:{
         type:String,

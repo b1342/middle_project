@@ -11,17 +11,18 @@ import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
 import axios from 'axios';
 import './FormDemo.css';
-const CreateUser = ({ setNewUser }) => {
+const UpdateUser = ({ user,setupduser }) => {
 
-    const [countries, setCountries] = useState([]);
+    console.log(user)
+   
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
     const defaultValues = {
-        name: '',
-        username: '',
-        email: '',
-        address: '',
-        phone: '',
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        address: user.address,
+        phone: user.phone,
 
     }
 
@@ -30,19 +31,13 @@ const CreateUser = ({ setNewUser }) => {
 
     const onSubmit = async (data) => {
         setFormData(data);
-        setShowMessage(true);
         reset();
-        console.log(data)
-        // try{
-            const response = await axios.post('http://localhost:1111/api/user/', data,)
-            if(response.status==200){
-                setNewUser(false)
-            }
-                
-        //     }
-        // catch(error){}
-
-        
+        console.log(`data:${data}`)
+        data._id=user._id
+        const response = await axios.put('http://localhost:1111/api/user/',data)
+        setShowMessage(true);
+        console.log(response)
+        setupduser(false)
         
     };
 
@@ -51,15 +46,15 @@ const CreateUser = ({ setNewUser }) => {
     };
 
     const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
-    
-    return (
+   
+ return (
         <div className="form-demo">
             <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                 <div className="flex justify-content-center flex-column pt-6 px-3">
                     <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
                     <h5>Successful</h5>
                     <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
-                        <h3>username have to be uniqu</h3> 
+                        <b>{formData.name}</b> 
                     </p>
                 </div>
             </Dialog>
@@ -127,4 +122,4 @@ const CreateUser = ({ setNewUser }) => {
 
 
 
-export default CreateUser
+export default UpdateUser
