@@ -30,20 +30,22 @@ const CreateUser = ({ setNewUser }) => {
 
     const onSubmit = async (data) => {
         setFormData(data);
-        setShowMessage(true);
+
         reset();
         console.log(data)
-        // try{
+        try {
             const response = await axios.post('http://localhost:1111/api/user/', data,)
-            if(response.status==200){
+            if (response.status == 200) {
                 setNewUser(false)
             }
-                
-        //     }
-        // catch(error){}
 
-        
-        
+        }
+        catch (error) {
+            setShowMessage(true);
+        }
+
+
+
     };
 
     const getFormErrorMessage = (name) => {
@@ -51,15 +53,15 @@ const CreateUser = ({ setNewUser }) => {
     };
 
     const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
-    
+
     return (
         <div className="form-demo">
             <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                 <div className="flex justify-content-center flex-column pt-6 px-3">
-                    <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
-                    <h5>Successful</h5>
+                    <i className="pi pi-times-circle" style={{ fontSize: '5rem', color: 'var(--red-500)' }}></i>
+                    <h2>failed</h2>
                     <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
-                        <h3>username have to be uniqu</h3> 
+                        <h1>username have to be uniqu 😔</h1>
                     </p>
                 </div>
             </Dialog>
@@ -90,7 +92,7 @@ const CreateUser = ({ setNewUser }) => {
                             <span className="p-float-label p-input-icon-right">
                                 <i className="pi pi-envelope" />
                                 <Controller name="email" control={control}
-                                    rules={{ required: 'Email is required.',  pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' } }}
+                                    rules={{ required: 'Email is required.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' } }}
                                     render={({ field, fieldState }) => (
                                         <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
                                     )} />

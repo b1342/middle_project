@@ -29,7 +29,7 @@ const Users = () => {
         setUser(res.data)
     }
 
-    const updateuser=(user)=>{
+    const updateuser=(user)=>{ 
         setspechuser(user)
         setupduser(true)
         

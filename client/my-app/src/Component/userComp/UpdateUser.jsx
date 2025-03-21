@@ -32,12 +32,19 @@ const UpdateUser = ({ user,setupduser }) => {
     const onSubmit = async (data) => {
         setFormData(data);
         reset();
+        
         console.log(`data:${data}`)
         data._id=user._id
-        const response = await axios.put('http://localhost:1111/api/user/',data)
-        setShowMessage(true);
-        console.log(response)
-        setupduser(false)
+        try{
+            const response = await axios.put('http://localhost:1111/api/user/', data,)
+            if(response.status==200){
+                setupduser(false)
+            }
+                
+            }
+        catch(error){
+            setShowMessage(true);
+        }
         
     };
 
@@ -51,10 +58,10 @@ const UpdateUser = ({ user,setupduser }) => {
         <div className="form-demo">
             <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                 <div className="flex justify-content-center flex-column pt-6 px-3">
-                    <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
-                    <h5>Successful</h5>
+                    <i className="pi pi-times-circle" style={{ fontSize: '5rem', color: 'var(--red-500)' }}></i>
+                    <h2>failed</h2>
                     <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
-                        <b>{formData.name}</b> 
+                        <h1>username have to be uniqu 😔</h1>
                     </p>
                 </div>
             </Dialog>
