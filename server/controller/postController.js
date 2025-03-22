@@ -9,7 +9,7 @@ const getPostbyid=('/',async(req,res)=>{
     const id=req.params
     const post=await Post.findById(id).lean()
     if(!post){
-        return res.status(400).json({messege:'post not found'})
+        return res.status(400).json({message:'post not found'})
     }
     res.json(post)
 })
@@ -26,14 +26,14 @@ const createnewPost=('/',async(req,res)=>{
 const updatePost=('/',async(req,res)=>{
     const {_id,title,body}=req.body
     if(!title){
-        return res.status(401).json({messege:'title is requred'})
+        return res.status(401).json({message:'title is requred'})
     }
     if(!_id){
-        return res.status(400).json({messege:'cant search without _id'})}
+        return res.status(400).json({message:'cant search without _id'})}
         
     const post=await Post.findById(_id).exec()
     if(!post){
-        return res.status(402).json({messege:'post not found'})
+        return res.status(402).json({message:'post not found'})
     }
     post.title=title
     post.body=body

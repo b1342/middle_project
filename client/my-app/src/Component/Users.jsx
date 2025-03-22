@@ -32,7 +32,6 @@ const Users = () => {
     const updateuser=(user)=>{ 
         setspechuser(user)
         setupduser(true)
-        
     }
     const statusBodyTemplate = (user) => {
         return <Button onClick={() => { deleteuser(user._id) }}>delete</Button>;

@@ -2,18 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { Dropdown } from 'primereact/dropdown';
-import { Calendar } from 'primereact/calendar';
-import { Password } from 'primereact/password';
-import { Checkbox } from 'primereact/checkbox';
+
 import { Dialog } from 'primereact/dialog';
-import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
 import axios from 'axios';
 import './FormDemo.css';
 const CreateUser = ({ setNewUser }) => {
 
-    const [countries, setCountries] = useState([]);
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
     const defaultValues = {
@@ -30,7 +25,6 @@ const CreateUser = ({ setNewUser }) => {
 
     const onSubmit = async (data) => {
         setFormData(data);
-
         reset();
         console.log(data)
         try {
@@ -43,9 +37,6 @@ const CreateUser = ({ setNewUser }) => {
         catch (error) {
             setShowMessage(true);
         }
-
-
-
     };
 
     const getFormErrorMessage = (name) => {
@@ -125,8 +116,4 @@ const CreateUser = ({ setNewUser }) => {
         </div>
     );
 }
-
-
-
-
-export default CreateUser
+    export default CreateUser
