@@ -9,7 +9,7 @@ const getallusers = ('/', async (req, res) => {
 const getuserbyid = ('/', async (req, res) => {
     const { userid } = req.params
     if (!userid) {
-        return res.status(400).json({ messege: "id is not required" })
+        return res.status(400).json({ message: "id is not required" })
     }
     else {
         const user = await User.findById(taskid).lean()
@@ -20,7 +20,7 @@ const getuserbyid = ('/', async (req, res) => {
 const createnewuser = ('/', async (req, res) => {
     const { name, username, email, address, phone } = req.body
     if (!name || !username || !email) {
-        return res.status(401).json({ messege: 'name & username & email are required!' })
+        return res.status(401).json({ message: 'name & username & email are required!' })
     }
     const existingUser = await User.findOne({ username})
     if (existingUser) {
@@ -35,13 +35,13 @@ const updateuser = ('/', async (req, res) => {
     const { _id, name, username, email, address, phone } = req.body
     console.log(req.body)
     if (!name || !username || !email) {
-        return res.status(403).json({ messege: 'name & username & email are required!' })
+        return res.status(403).json({ message: 'name & username & email are required!' })
     }
     if (!_id)
-        return res.status(400).json({ messege: 'cant search without _id' })
+        return res.status(400).json({ message: 'cant search without _id' })
     const user = await User.findById(_id).exec()
     if (!user) {
-        return res.status(403).json({ messege: 'no such as user' })
+        return res.status(403).json({ message: 'no such as user' })
     }
     const existingUser = await User.findOne({ username})
     if (existingUser && existingUser._id.toString() !== _id.toString()) {
@@ -60,7 +60,7 @@ const deleteuser = ('/', async (req, res) => {
     const { id } = req.params
     const user = await User.findById(id).exec()
     if (!user) {
-        return res.status(400).json({ messege: 'user not found' })
+        return res.status(400).json({ message: 'user not found' })
     }
     const result = await User.deleteOne(user)
     res.json(`'${result.name}' deleted`)

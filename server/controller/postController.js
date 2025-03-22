@@ -17,7 +17,7 @@ const getPostbyid=('/',async(req,res)=>{
 const createnewPost=('/',async(req,res)=>{
     const {title,body}=req.body
     if(!title){
-        return res.status(401).json({messege:'title is requred'})
+        return res.status(401).json({message:'title is requred'})
     }
     const post=await Post.create({title,body})
     res.json(post)
@@ -44,10 +44,10 @@ const updatePost=('/',async(req,res)=>{
 const deletePost=('/',async(req,res)=>{
     const {_id}=req.body
     if(!_id)
-        {return res.status(400).json({messege:'cant delete without _id'})}
+        {return res.status(400).json({message:'cant delete without _id'})}
     const post=await Post.findById(_id).exec()
     if(!post){
-        return res.status(402).json({messege:'post not found'})
+        return res.status(402).json({message:'post not found'})
     }
     const result=await Post.deleteOne(post)
     res.json(result)

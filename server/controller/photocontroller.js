@@ -17,7 +17,7 @@ const getPothosbyid=('/',async(req,res)=>{
 const createnewPhoto=('/',async(req,res)=>{
     const {title,imageURL}=req.body
     if(!title){
-        return res.status(401).json({messege:'title is requred'})
+        return res.status(401).json({message:'title is requred'})
     }
     const photo=await Photo.create({title,imageURL})
     res.json(photo)
