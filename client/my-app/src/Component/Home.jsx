@@ -56,7 +56,7 @@ import {useNavigate}  from 'react-router-dom'
             }
         ];
 
-        const start = <img alt="logo" src="https://primefaces.org/cdn/primereact/images/logo.png" height="40" className="mr-2"></img>;
+        const start = <img alt="logo" src='https://d3m9l0v76dty0.cloudfront.net/system/photos/9005958/large/45156ff0bcbaaa736b17375f16604441.png' height="40" className="mr-2"></img>;
         const end = (
             <div className="flex align-items-center gap-2">
                 <InputText placeholder="Search" type="text" className="w-8rem sm:w-auto" />
