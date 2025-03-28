@@ -6,6 +6,6 @@ router.get('/',postcontroller.getallPosts)
 router.get('/:_id',postcontroller.getPostbyid)
 router.post('/',postcontroller.createnewPost)
 router.put('/',postcontroller.updatePost)
-router.delete('/',postcontroller.deletePost)
+router.delete('/:_id',postcontroller.deletePost) 
 
 module.exports=router

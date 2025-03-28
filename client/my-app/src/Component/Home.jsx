@@ -47,13 +47,7 @@ import {useNavigate}  from 'react-router-dom'
                     navigate('./Todos')
                    }
             },
-            {
-                label: 'photos',
-                icon: 'pi pi-images',
-                command:()=>{
-                    navigate('./photos')
-                   }
-            }
+            
         ];
 
         const start = <img alt="logo" src='https://d3m9l0v76dty0.cloudfront.net/system/photos/9005958/large/45156ff0bcbaaa736b17375f16604441.png' height="40" className="mr-2"></img>;

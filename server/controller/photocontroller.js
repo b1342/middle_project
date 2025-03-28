@@ -1,7 +1,7 @@
 const Photo=require('../models/Photo')
 
 const getallPhotoes=('/',async(req,res)=>{
-    const photos=await Photo.find().lean()
+    const photos=await Photo.find().lean().sort({_id:1})
     res.json(photos)
 })
 
@@ -10,7 +10,7 @@ const getPothosbyid=('/',async(req,res)=>{
     const photo=await Photo.findOne(id).lean()
     if(!photo){
         return res.status(400).json({message:'not found'})
-    }
+    } 
     res.json(photo)
 })
 

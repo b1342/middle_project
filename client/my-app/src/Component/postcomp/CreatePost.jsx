@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from "primereact/inputtext";
+
 import axios from "axios";
 
-const CreateTodo = ({ gettodos }) => {
+const CreatePost = ({ getposts }) => {
     const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState('');
-    const [tags, setTags] = useState('');
+    const [body, setBody] = useState('');
     const [error, setError] = useState('');
 
     const create = async () => {
@@ -17,17 +18,17 @@ const CreateTodo = ({ gettodos }) => {
         }
         setError('');
 
-        const todo = { title, tags };
-        console.log(todo);
+        const post = { title, body };
+        console.log(post);
         try {
-            const res = await axios.post('http://localhost:1111/api/todo', todo);
+            const res = await axios.post('http://localhost:1111/api/post', post);
             console.log(res);
-            gettodos();
+            getposts();
             setVisible(false);
             setTitle('');
-            setTags('');
+            setBody('');
         } catch (error) {
-            console.error("Error creating todo", error);
+            console.error("Error creating post", error);
         }
     };
 
@@ -57,12 +58,12 @@ const CreateTodo = ({ gettodos }) => {
                         </div>
                         <div className="inline-flex flex-column gap-2">
                             <label className="text-primary-50 font-semibold">
-                            Tags
+                            Body
                             </label>
                             <InputText 
-                                value={tags}
-                                onChange={(e) => setTags(e.target.value)}  
-                                placeholder="tags" 
+                                value={body}
+                                onChange={(e) => setBody(e.target.value)}  
+                                placeholder="body" 
                             />
                         </div>
                         <div className="flex align-items-center gap-2">
@@ -76,4 +77,4 @@ const CreateTodo = ({ gettodos }) => {
     );
 };
 
-export default CreateTodo;
+export default CreatePost;

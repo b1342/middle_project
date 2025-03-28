@@ -1,7 +1,7 @@
 const Post=require("../models/Post")
 
 const getallPosts=('/',async(req,res)=>{
-    const allposts=await Post.find().lean()
+    const allposts=await Post.find().lean().sort({_id:1})
     res.json(allposts)
 })
 
@@ -42,15 +42,16 @@ const updatePost=('/',async(req,res)=>{
 })
 
 const deletePost=('/',async(req,res)=>{
-    const {_id}=req.body
+    const {_id}=req.params
+    console.log(_id)
     if(!_id)
-        {return res.status(400).json({message:'cant delete without _id'})}
+        {return res.status(401).json({message:'cant delete without _id'})}
     const post=await Post.findById(_id).exec()
     if(!post){
         return res.status(402).json({message:'post not found'})
     }
     const result=await Post.deleteOne(post)
     res.json(result)
-
+ 
 })
 module.exports={getallPosts,getPostbyid,createnewPost,updatePost,deletePost}

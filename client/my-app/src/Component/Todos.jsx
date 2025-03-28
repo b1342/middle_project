@@ -58,7 +58,7 @@ const Todos = () => {
             </div>
         );
     };
-    const listTemplate = (todoes, layout) => {
+    const listTemplate = (todoes) => {
         return <div className="grid grid-nogutter">{todoes.map((todo) => gridItem(todo))}</div>;
     };
 

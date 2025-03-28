@@ -1,7 +1,7 @@
 const Todo = require("../models/Todo")
 
 const getallTodos = ('/', async (req, res) => {
-    const alltodos = await Todo.find().lean()
+    const alltodos = await Todo.find().lean().sort({_id:1})
     res.json(alltodos)
 })
 

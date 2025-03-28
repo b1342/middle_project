@@ -2,7 +2,7 @@ const User = require('../models/User')
 
 const getallusers = ('/', async (req, res) => {
     console.log("hhhhh");
-    const allusers = await User.find().lean()
+    const allusers = await User.find().lean().sort({_id:1})
     res.json(allusers)
 })
 

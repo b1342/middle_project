@@ -18,10 +18,15 @@ const UpdateTodo = ({ todo, gettodos }) => {
         setError('');
 
         const updatedTodo = { ...todo, title, tags };
-        const res = await axios.put('http://localhost:1111/api/todo', updatedTodo);
-        console.log(res);
-        gettodos();
-        setVisible(false);
+        try {
+            const res = await axios.put('http://localhost:1111/api/todo', updatedTodo);
+            console.log(res);
+            gettodos();
+            setVisible(false);
+        } catch (error) {
+            console.error("Error updating todo", error);
+        }
+
     };
 
     return (
@@ -39,19 +44,19 @@ const UpdateTodo = ({ todo, gettodos }) => {
                     <div className="flex flex-column px-8 py-5 gap-4" style={{ borderRadius: '12px', backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}>
                         <div className="inline-flex flex-column gap-2">
                             <label className="text-primary-50 font-semibold">Title</label>
-                            <InputText 
-                                value={title} 
-                                onChange={(e) => setTitle(e.target.value)} 
-                                placeholder="title" 
+                            <InputText
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                placeholder="title"
                             />
                             {error && <small className="p-error">{error}</small>}
                         </div>
                         <div className="inline-flex flex-column gap-2">
                             <label className="text-primary-50 font-semibold">Tags</label>
-                            <InputText 
-                                value={tags} 
-                                onChange={(e) => setTags(e.target.value)} 
-                                placeholder="tags" 
+                            <InputText
+                                value={tags}
+                                onChange={(e) => setTags(e.target.value)}
+                                placeholder="tags"
                             />
                         </div>
                         <div className="flex align-items-center gap-2">

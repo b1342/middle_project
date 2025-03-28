@@ -4,10 +4,10 @@ import { Dialog } from 'primereact/dialog';
 import { InputText } from "primereact/inputtext";
 import axios from "axios";
 
-const CreateTodo = ({ gettodos }) => {
+const UpdataPost = ({ post,getposts }) => {
     const [visible, setVisible] = useState(false);
-    const [title, setTitle] = useState('');
-    const [tags, setTags] = useState('');
+    const [title, setTitle] = useState(post.title);
+    const [body, setBody] = useState(post.body);
     const [error, setError] = useState('');
 
     const create = async () => {
@@ -17,23 +17,25 @@ const CreateTodo = ({ gettodos }) => {
         }
         setError('');
 
-        const todo = { title, tags };
-        console.log(todo);
+        const updatedpost = { ...post, title, body };
         try {
-            const res = await axios.post('http://localhost:1111/api/todo', todo);
+            const res = await axios.put('http://localhost:1111/api/post', updatedpost);
             console.log(res);
-            gettodos();
+            getposts();
             setVisible(false);
-            setTitle('');
-            setTags('');
+           
         } catch (error) {
-            console.error("Error creating todo", error);
+            console.error("Error updating post", error);
         }
     };
 
     return (
         <div className="card flex justify-content-center">
-            <Button label="create new" icon="pi pi-plus" onClick={() => setVisible(true)} />
+            <Button icon="pi pi-pencil" className="p-button-rounded"
+                         style={{
+                                backgroundColor: "lightblue",
+                                borderColor: 'lightblue'
+                            }} onClick={() => setVisible(true)} />
             <Dialog
                 visible={visible}
                 modal
@@ -57,16 +59,16 @@ const CreateTodo = ({ gettodos }) => {
                         </div>
                         <div className="inline-flex flex-column gap-2">
                             <label className="text-primary-50 font-semibold">
-                            Tags
+                            Body
                             </label>
                             <InputText 
-                                value={tags}
-                                onChange={(e) => setTags(e.target.value)}  
-                                placeholder="tags" 
+                                value={body}
+                                onChange={(e) => setBody(e.target.value)}  
+                                placeholder="body" 
                             />
                         </div>
                         <div className="flex align-items-center gap-2">
-                            <Button label="create" onClick={() => create()} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" />
+                            <Button label="update" onClick={() => create()} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10" />
                             <Button label="Cancel" onClick={() => setVisible(false)}  text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"/>
                         </div>
                     </div>
@@ -76,4 +78,4 @@ const CreateTodo = ({ gettodos }) => {
     );
 };
 
-export default CreateTodo;
+export default UpdataPost;
